@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import doctor from '../../../../../img/doctoravatar.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,6 +16,7 @@ const notify = (text) => toast(text);
 
 const Add_Patient = () => {
   const [loading, setLoading] = useState(false);
+  const [doctors, setDoctors] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -30,7 +31,7 @@ const Add_Patient = () => {
       try {
         const response = await fetch('http://localhost:5000/doctors');
         const doctors = await response.json();
-        setDoctorOptions(doctors);
+        setDoctors(doctors);
       } catch (error) {
         console.error('Error fetching doctors:', error);
       }
@@ -357,9 +358,9 @@ const Add_Patient = () => {
                     required
                   >
                     <option value=''>Select</option>
-                    {doctorOptions.map((doctor) => (
-                      <option key={doctor.id} value={doctor.id}>
-                        {doctor.name}
+                    {doctors.map((doctor) => (
+                      <option key={doctor._id} value={doctor._id}>
+                        {doctor.docName}
                       </option>
                     ))}
                   </select>
