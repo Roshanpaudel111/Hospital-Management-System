@@ -1,25 +1,25 @@
-import { Table } from "antd";
-import { useEffect, useState } from "react";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Table } from 'antd';
+import { useEffect, useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import {
   DeleteAppointment,
   GetAllAppointment,
-} from "../../../../../Redux/Datas/action";
-import Sidebar from "../../GlobalFiles/Sidebar";
+} from '../../../../../Redux/Datas/action';
+import Sidebar from '../../GlobalFiles/Sidebar';
 
 const Check_Appointment = () => {
   const { data } = useSelector((store) => store.auth);
-
+  const department = data.user.department;
   const disptach = useDispatch();
 
   const columns = [
-    { title: "Patient Name", dataIndex: "patientName", key: "patientName" },
-    { title: "Mobile", dataIndex: "mobile", key: "mobile" },
-    { title: "Disease", dataIndex: "disease", key: "disease" },
-    { title: "Department", dataIndex: "department", key: "department" },
-    { title: "Date", dataIndex: "date", key: "date" },
+    { title: 'Patient Name', dataIndex: 'patientName', key: 'patientName' },
+    { title: 'Mobile', dataIndex: 'mobile', key: 'mobile' },
+    { title: 'Disease', dataIndex: 'disease', key: 'disease' },
+    { title: 'Department', dataIndex: 'department', key: 'department' },
+    { title: 'Date', dataIndex: 'date', key: 'date' },
   ];
 
   const AllAppointment = useSelector((state) => state.data.Appointments);
@@ -28,25 +28,25 @@ const Check_Appointment = () => {
     disptach(DeleteAppointment(id));
   };
   useEffect(() => {
-    disptach(GetAllAppointment());
+    disptach(GetAllAppointment(department));
   }, []);
 
   if (data?.isAuthticated === false) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={'/'} />;
   }
 
-  if (data?.user.userType !== "doctor") {
-    return <Navigate to={"/dashboard"} />;
+  if (data?.user.userType !== 'doctor') {
+    return <Navigate to={'/dashboard'} />;
   }
 
   return (
     <>
-      <div className="container">
+      <div className='container'>
         <Sidebar />
-        <div className="AfterSideBar">
-          <div className="Payment_Page">
-            <h1 style={{ marginBottom: "2rem" }}>Appointment Details</h1>
-            <div className="patientBox">
+        <div className='AfterSideBar'>
+          <div className='Payment_Page'>
+            <h1 style={{ marginBottom: '2rem' }}>Appointment Details</h1>
+            <div className='patientBox'>
               <table>
                 <thead>
                   <tr>
@@ -61,7 +61,7 @@ const Check_Appointment = () => {
                 <tbody>
                   {AllAppointment?.map((ele) => {
                     return (
-                      <tr>
+                      <tr key={ele._id}>
                         <td>{ele.patientName}</td>
                         <td>{ele.mobile}</td>
                         <td>{ele.disease}</td>
@@ -70,11 +70,11 @@ const Check_Appointment = () => {
                         <td>
                           <button
                             style={{
-                              border: "none",
-                              color: "red",
-                              outline: "none",
-                              background: "transparent",
-                              cursor: "pointer",
+                              border: 'none',
+                              color: 'red',
+                              outline: 'none',
+                              background: 'transparent',
+                              cursor: 'pointer',
                             }}
                             onClick={() => DeleteAppoint(ele._id)}
                           >

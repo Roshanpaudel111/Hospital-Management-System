@@ -1,16 +1,16 @@
-const express = require("express");
-const { AppointmentModel } = require("../models/Appointment.model");
+const express = require('express');
+const { AppointmentModel } = require('../models/Appointment.model');
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  let query = req.query;
+router.post('/department', async (req, res) => {
+  let { department } = req.body;
   try {
-    const appointments = await AppointmentModel.find(query);
+    const appointments = await AppointmentModel.find({ department });
     res.status(200).send(appointments);
   } catch (error) {
     console.log(error);
-    res.status(400).send({ error: "Something went wrong" });
+    res.status(400).send({ error: 'Something went wrong' });
   }
 });
 
@@ -25,19 +25,19 @@ router.get("/", async (req, res) => {
 //   res.send("Appointment successfully booked.");
 // });
 
-router.post("/create", async (req, res) => {
+router.post('/create', async (req, res) => {
   const payload = req.body;
   try {
     const appointment = new AppointmentModel(payload);
     await appointment.save();
-    res.send("Appointment successfully booked.");
+    res.send('Appointment successfully booked.');
   } catch (error) {
     res.send(error);
     return;
   }
 });
 
-router.patch("/:appointmentId", async (req, res) => {
+router.patch('/:appointmentId', async (req, res) => {
   const id = req.params.appointmentId;
   const payload = req.body;
   try {
@@ -51,11 +51,11 @@ router.patch("/:appointmentId", async (req, res) => {
     res.status(200).send(`Appointment with id ${id} updated`);
   } catch (error) {
     console.log(error);
-    res.status(400).send({ error: "Something went wrong, unable to Update." });
+    res.status(400).send({ error: 'Something went wrong, unable to Update.' });
   }
 });
 
-router.delete("/:appointmentId", async (req, res) => {
+router.delete('/:appointmentId', async (req, res) => {
   const id = req.params.appointmentId;
   try {
     const appointment = await AppointmentModel.findByIdAndDelete({ _id: id });
@@ -65,7 +65,7 @@ router.delete("/:appointmentId", async (req, res) => {
     res.status(200).send(`Appointment with id ${id} deleted`);
   } catch (error) {
     console.log(error);
-    res.status(400).send({ error: "Something went wrong, unable to Delete." });
+    res.status(400).send({ error: 'Something went wrong, unable to Delete.' });
   }
 });
 
