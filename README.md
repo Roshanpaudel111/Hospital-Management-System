@@ -41,14 +41,12 @@ To run the Hospital Management System locally, follow these steps:
 
 3. Navigate to the project `frontend` directory and run frontend:
 
-   ```bash
+  ```bash
   cd Hospital-Management-System/frontend
   npm install
   npm run dev
-   ```
-
-7. Access the application in your web browser at `http://localhost:3000`.
-
+```
+4. Now access the application using this url `http://localhost:3000`
 ## Technologies Used
 
 - **Frontend**: HTML, CSS, JavaScript, React
