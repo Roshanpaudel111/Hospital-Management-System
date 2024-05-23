@@ -1,11 +1,11 @@
-import * as types from './types';
-import axios from 'axios';
+import * as types from "./types";
+import axios from "../../config/axios";
 
 // CreateReport
 export const CreateReport = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.CREATE_REPORT_REQUEST });
-    const res = await axios.post('http://localhost:5000/reports/create', data);
+    const res = await axios.post("/reports/create", data);
     console.log(res);
     return res.data;
     // dispatch({
@@ -28,7 +28,7 @@ export const CreateReport = (data) => async (dispatch) => {
 export const GetDoctorDetails = () => async (dispatch) => {
   try {
     dispatch({ type: types.GET_DOCTOR_REQUEST });
-    const res = await axios.get('http://localhost:5000/doctors');
+    const res = await axios.get("/doctors");
     console.log(res);
     // dispatch({
     //   type: types.GET_DOCTOR_SUCCESS,
@@ -50,10 +50,7 @@ export const GetDoctorDetails = () => async (dispatch) => {
 export const AddPatients = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.ADD_PATIENT_REQUEST });
-    const res = await axios.post(
-      'http://localhost:5000/patients/register',
-      data
-    );
+    const res = await axios.post("/patients/register", data);
     return res.data;
     // dispatch({
     //   type: types.ADD_PATIENT_SUCCESS,
@@ -76,7 +73,7 @@ export const AddPatients = (data) => async (dispatch) => {
 export const CreateBeds = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.ADD_BED_REQUEST });
-    const res = await axios.post('http://localhost:5000/beds/add', data);
+    const res = await axios.post("/beds/add", data);
     return res.data;
     // dispatch({
     //   type: types.ADD_BED_SUCCESS,
@@ -98,7 +95,7 @@ export const CreateBeds = (data) => async (dispatch) => {
 export const CreatePayment = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.CREATE_PAYMENT_REQUEST });
-    const res = await axios.post('http://localhost:5000/payments/add', data);
+    const res = await axios.post("/payments/add", data);
     console.log(res.data);
     // dispatch({
     //   type: types.CREATE_PAYMENT_SUCCESS,
@@ -120,7 +117,7 @@ export const CreatePayment = (data) => async (dispatch) => {
 export const GetBeds = () => async (dispatch) => {
   try {
     dispatch({ type: types.GET_BED_REQUEST });
-    const res = await axios.get('http://localhost:5000/beds');
+    const res = await axios.get("/beds");
     console.log(res);
     dispatch({
       type: types.GET_BED_SUCCESS,
@@ -140,10 +137,7 @@ export const GetBeds = () => async (dispatch) => {
 export const CreateBooking = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.CREATE_BOOKING_REQUEST });
-    const res = await axios.post(
-      'http://localhost:5000/appointments/create',
-      data
-    );
+    const res = await axios.post("/create", data);
     console.log(res);
     // dispatch({ type: types.CREATE_BOOKING_SUCCESS, payload: res.data.postData });
   } catch (error) {
@@ -155,7 +149,7 @@ export const CreateBooking = (data) => async (dispatch) => {
 export const AddBed = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.ADD_BEDS_REQUEST });
-    const res = await axios.post('http://localhost:5000/beds/add', data);
+    const res = await axios.post("/beds/add", data);
     console.log(res);
 
     return res.data;
@@ -173,7 +167,7 @@ export const AddBed = (data) => async (dispatch) => {
 export const GetSingleBed = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.GET_SINGLE_BEDS_REQUEST });
-    const res = await axios.post('http://localhost:5000/beds/single', data);
+    const res = await axios.post("/beds/single", data);
     // console.log(res);
     return res.data;
   } catch (error) {
@@ -185,7 +179,7 @@ export const GetSingleBed = (data) => async (dispatch) => {
 export const EditSingleBed = (data, id) => async (dispatch) => {
   try {
     dispatch({ type: types.GET_SINGLE_BEDS_REQUEST });
-    const res = await axios.patch(`http://localhost:5000/beds/${id}`, data);
+    const res = await axios.patch(`/beds/${id}`, data);
     // console.log(res);
     return res.data;
   } catch (error) {
@@ -197,7 +191,7 @@ export const EditSingleBed = (data, id) => async (dispatch) => {
 export const dischargePatient = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.DISCHARGE_PATIENT_REQUEST });
-    const res = await axios.put(`http://localhost:5000/beds/discharge`, data);
+    const res = await axios.put(`/beds/discharge`, data);
     console.log(res);
     // return res.data;
     dispatch({
@@ -221,7 +215,7 @@ export const dischargePatient = (data) => async (dispatch) => {
 export const GetPatients = () => async (dispatch) => {
   try {
     dispatch({ type: types.GET_PATIENT_REQUEST });
-    const res = await axios.get(`http://localhost:5000/patients`);
+    const res = await axios.get(`/patients`);
     console.log(res.data);
     dispatch({
       type: types.GET_PATIENT_SUCCESS,
@@ -236,7 +230,7 @@ export const GetPatients = () => async (dispatch) => {
 export const GetAllData = () => async (dispatch) => {
   try {
     dispatch({ type: types.GET_ALLDATA_REQUEST });
-    const res = await axios.get(`http://localhost:5000/hospitals`);
+    const res = await axios.get(`/hospitals`);
     console.log(res.data);
     dispatch({
       type: types.GET_ALLDATA_SUCCESS,
@@ -251,12 +245,9 @@ export const GetAllData = () => async (dispatch) => {
 export const GetAllAppointment = (department) => async (dispatch) => {
   try {
     dispatch({ type: types.GET_APPOINTMENT_DETAILS_REQUEST });
-    const res = await axios.post(
-      `http://localhost:5000/appointments/department`,
-      {
-        department: department,
-      }
-    );
+    const res = await axios.post(`/appointments/department`, {
+      department: department,
+    });
     // console.log(res.data);
     // return res.data;
     dispatch({
@@ -272,7 +263,7 @@ export const GetAllAppointment = (department) => async (dispatch) => {
 export const DeleteAppointment = (id) => async (dispatch) => {
   try {
     dispatch({ type: types.DELETE_APPOINTMENT_REQUEST });
-    const res = await axios.delete(`http://localhost:5000/appointments/${id}`);
+    const res = await axios.delete(`/appointments/${id}`);
     console.log(res.data);
     // return res.data;
     dispatch({
@@ -288,7 +279,7 @@ export const DeleteAppointment = (id) => async (dispatch) => {
 export const GetAllReports = () => async (dispatch) => {
   try {
     dispatch({ type: types.GET_REPORTS_REQUEST });
-    const res = await axios.get(`http://localhost:5000/reports`);
+    const res = await axios.get(`/reports`);
     // console.log(res.data);
     return res.data;
     // dispatch({
