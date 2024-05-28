@@ -1,0 +1,12 @@
+{
+  "adminName": "Alauddin Ansari",
+  "adminID": 166001,
+  "email": "admin@gmail.com",
+  "password": "admin",
+  "gender": "male",
+  "age": 22,
+  "mobile": 9800000000,
+  "DOB": "2000-10-10",
+  "address": "Kathmandu, Nepal",
+  "education": "Bachelor in computer engineering"
+}
